@@ -1,3 +1,11 @@
+<?php
+  require_once("connection.php");
+  require_once("app/functions.php");
+  session_start();
+
+  set_session_uuid();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,43 +47,18 @@
   <main class="container">
     <h1 class="text-center my-5">SESSFA Student Step Tracker</h1>
     <div id="form-wrapper">
-      <form>
-        <div class="col-12 mb-3">
-          <label for="user-first-name" class="form-label">Student Name</label>
-          <input type="text" class="form-control" id="user-first-name" name="user-first-name" aria-describedby="user-first-name-help" required>
-          <div id="user-first-name-help" class="form-text">We'll never share your name with anyone else.</div>
-        </div>
-        <div class="col-12 mb-3">
-          <select class="form-select" name="user-school" aria-label="Default select example" required>
-            <option selected>Choose School</option>
-            <option value="Aki Kurose">Aki Kurose</option>
-            <option value="Beacon Hill International">Beacon Hill International</option>
-            <option value="Dearborn Park">Dearborn Park</option>
-            <option value="Dunlap">Dunlap</option>
-            <option value="Emerson">Emerson</option>
-            <option value="Graham Hill">Graham Hill</option>
-            <option value="Hawthorne">Hawthorne</option>
-            <option value="John Muir">John Muir</option>
-            <option value="Kimball">Kimball</option>
-            <option value="Maple">Maple</option>
-            <option value="Mercer International">Mercer International</option>
-            <option value="MLK Jr.">MLK Jr.</option>
-            <option value="Orca">Orca</option>
-            <option value="Rainier View">Rainier View</option>
-            <option value="Rising Star">Rising Star</option>
-            <option value="South Shore K-8">South Shore K-8</option>
-            <option value="Wing Luke">Wing Luke</option>
-          </select>
+      <form action="app/process_steps.php" method="post">
+        <h2>Kids</h2>
+        <input type="hidden" name="user_type" value="kid">
+        <div class="col-12 col-md-6 mb-3">
+          <label for="kid-entry-date" class="form-label">Date</label>
+          <input type="date" class="form-control form-control-lg" id="kid-entry-date" name="kid-entry-date" aria-describedby="kid-entry-date-help" required>
+          <div id="kid-entry-date-help" class="form-text">Enter the date of your step count.</div>
         </div>
         <div class="col-12 col-md-6 mb-3">
-          <label for="user-entry-date" class="form-label">Date</label>
-          <input type="date" class="form-control form-control-lg" id="user-entry-date" name="user-entry-date" aria-describedby="user-entry-date-help" required>
-          <div id="user-entry-date-help" class="form-text">Enter the date of your step count.</div>
-        </div>
-        <div class="col-12 col-md-6 mb-3">
-          <label for="user-steps" class="form-label">Number of Steps</label>
-          <input type="number" class="form-control form-control-lg" id="user-steps" name="user-steps" aria-describedby="user-steps-help" min="0" max="10,000" required>
-          <div id="user-steps-help" class="form-text">Enter your number of steps for this day.</div>
+          <label for="kid-steps" class="form-label">Number of Steps</label>
+          <input type="number" class="form-control form-control-lg" id="kid-steps" name="kid-steps" aria-describedby="kid-steps-help" min="0" max="20,000" required>
+          <div id="kid-steps-help" class="form-text">Enter your number of steps for this day.</div>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -90,7 +73,7 @@
     $(function(){
       // console.log(moment().format('yyyy-MM-dd'));
       // default the displayed date in the picker to today's date.
-      $("#user-entry-date").val(moment().format('yyyy-MM-DD'));
+      $("#kid-entry-date").val(moment().format('yyyy-MM-DD'));
 
     });
 
