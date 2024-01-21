@@ -1,0 +1,31 @@
+/* SESSFA StepTracker CSS */
+
+:root {
+    --sessfa-green: #10AE2F;
+    --sessfa-dark-green: #009D5E;
+    --sessfa-deep-blue: #094A75;
+    --sessfa-light-blue: #D9F3FF;
+    --sessfa-grey: #5F7999;
+    --sessfa-olive: #3E4A3C;
+    --sessfa-sandy: #A2AF9F;
+    --sessfa-bright-blue: #00B2FF;
+    --sessfa-blue: #007CCA;
+  }
+  body {
+     font-family: 'Montserrat';
+     font-weight: 400;
+  }
+  .bg-sessfa-green {
+    background-color: var(--sessfa-green)!important;
+  }
+  .btn-sessfa-primary {
+    color: black;
+    background-color: var(--sessfa-green);
+    border-color: black;
+  }
+  .btn-sessfa-primary:hover {
+    background-color: var(--sessfa-dark-green);
+  }
+  .text-sessfa-light {
+    color: var(--sessfa-light-blue);
+  }
