@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SESSFA STEP TRACKER</title>
+    <title>SESSFA Movements Tracker</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
@@ -55,7 +55,7 @@
     </div>
 </header>
 <main class="container">
-    <h1 class="text-center my-5">SESSFA Student Step Tracker</h1>
+    <h1 class="text-center my-5">SESSFA Movements Tracker</h1>
     <div class="row">
         <div class="col-12 col-md-6 form-wrapper">
             <form action="app/process_steps.php" method="post">

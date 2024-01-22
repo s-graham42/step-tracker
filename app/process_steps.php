@@ -86,7 +86,7 @@
       unset($_SESSION['kid-steps_entry']);
       unset($_SESSION['kid-entry-date_entry']);
 
-      header("Location: ../index.php");
+      header("Location: ./success.php");
       exit;
     }
 
@@ -147,7 +147,7 @@
       unset($_SESSION['adult-steps_entry']);
       unset($_SESSION['adult-entry-date_entry']);
 
-      header("Location: ../index.php");
+      header("Location: ./success.php");
       exit;
     }
 
