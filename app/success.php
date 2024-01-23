@@ -50,10 +50,10 @@
 <main class="container">
     <h1 class="text-center my-5"><?= APPLICATION_TITLE; ?></h1>
     <h2 class="text-center my-4">Success!!</h2>
-    <h3 class="text-center my-4">Thanks for entering your steps!</h3>
+    <h3 class="text-center my-4">Thanks for entering your movements!</h3>
     <div class="row flex-wrap mt-5">
         <div class="col text-center text-nowrap mt-5">
-            <a href="../index.php" class="col btn btn-primary btn-lg">Enter More Steps</a>
+            <a href="../index.php" class="col btn btn-primary btn-lg">Enter More Movements</a>
         </div>
         <div class="col text-center text-nowrap mt-5">
             <a href="./results.php" class="col btn btn-success btn-lg">Visit the Results Page</a>
