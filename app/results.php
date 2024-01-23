@@ -75,6 +75,7 @@
       </div>
     </div>
   </main>
+  <footer style="width:100%; height:100px;"></footer>
   <aside class="container mt-5 d-none">
       <p>Todo:</p>
       <ul>
