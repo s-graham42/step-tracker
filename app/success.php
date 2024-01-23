@@ -1,5 +1,6 @@
 <?php
   require_once("../connection.php");
+  require_once("../constants.php");
   require_once("functions.php");
   session_start();
 
@@ -12,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SESSFA Movements Tracker</title>
+    <title><?= APPLICATION_TITLE; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
@@ -47,15 +48,15 @@
     </div>
 </header>
 <main class="container">
-    <h1 class="text-center my-5">SESSFA Student Step Tracker</h1>
+    <h1 class="text-center my-5"><?= APPLICATION_TITLE; ?></h1>
     <h2 class="text-center my-4">Success!!</h2>
     <h3 class="text-center my-4">Thanks for entering your steps!</h3>
     <div class="row flex-wrap mt-5">
         <div class="col text-center text-nowrap mt-5">
-            <a href="./results.php" class="col btn btn-success btn-lg">Visit the Results Page</a>
+            <a href="../index.php" class="col btn btn-primary btn-lg">Enter More Steps</a>
         </div>
         <div class="col text-center text-nowrap mt-5">
-            <a href="../index.php" class="col btn btn-primary btn-lg">Enter More Steps</a>
+            <a href="./results.php" class="col btn btn-success btn-lg">Visit the Results Page</a>
         </div>
     </div>
 </main>

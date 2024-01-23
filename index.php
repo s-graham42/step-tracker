@@ -1,5 +1,6 @@
 <?php
   require_once("connection.php");
+  require_once("constants.php");
   require_once("app/functions.php");
   session_start();
 
@@ -12,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SESSFA Movements Tracker</title>
+    <title><?= APPLICATION_TITLE; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
@@ -25,8 +26,8 @@
   isset($_SESSION['adult-entry-date_entry']) ? "" : $_SESSION['adult-entry-date_entry'] = date("Y-m-d");
   isset($_SESSION['adult-steps_entry']) ? "" : $_SESSION['adult-steps_entry'] = "";
 
-    var_dump($_POST);
-    var_dump($_SESSION);
+//    var_dump($_POST);
+//    var_dump($_SESSION);
 ?>
 <body>
 <style>
@@ -55,52 +56,52 @@
     </div>
 </header>
 <main class="container">
-    <h1 class="text-center my-5">SESSFA Movements Tracker</h1>
+    <h1 class="text-center my-5"><?= APPLICATION_TITLE; ?></h1>
     <div class="row">
         <div class="col-12 col-md-6 form-wrapper">
             <form action="app/process_steps.php" method="post">
-                <h2>Kids enter steps here!</h2>
+                <h2>Kids enter movements here!</h2>
                 <input type="hidden" name="action" value="kid-steps">
                 <div class="col-12 col-md-6 mb-3">
                     <label for="kid-entry-date" class="form-label">Date</label>
                     <input type="date" class="form-control form-control-lg" id="kid-entry-date" name="kid-entry-date"
                            value="<?= $_SESSION['kid-entry-date_entry']; ?>" aria-describedby="kid-entry-date-help" required>
-                    <div id="kid-entry-date-help" class="form-text">Enter the date of your step count.</div>
+                    <div id="kid-entry-date-help" class="form-text">Enter the date of your movement count.</div>
                     <?php showErrors('kid-entry-date-errors'); ?>
                     <?php showErrors('kid-entry-exists-errors'); ?>
                 </div>
                 <div class="col-12 col-md-6 mb-3">
-                    <label for="kid-steps" class="form-label">Number of Steps</label>
+                    <label for="kid-steps" class="form-label">Number of Movements</label>
                     <input type="number" class="form-control form-control-lg" id="kid-steps" name="kid-steps"
                            value="<?= $_SESSION['kid-steps_entry']; ?>" aria-describedby="kid-steps-help" min="0" max="30,000" required>
-                    <div id="kid-steps-help" class="form-text">Enter your number of steps for this day.</div>
+                    <div id="kid-steps-help" class="form-text">Enter your number of movements for this day.</div>
                   <?php showErrors('kid-steps-errors'); ?>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit Kid Steps</button>
+                <button type="submit" class="btn btn-primary">Submit for Kid</button>
             </form>
         </div>
         <div class="col-12 col-md-6 mt-5 mt-md-0 form-wrapper">
             <form action="app/process_steps.php" method="post">
-                <h2>Adults enter steps here!</h2>
+                <h2>Adults enter movements here!</h2>
                 <input type="hidden" name="action" value="adult-steps">
                 <div class="col-12 col-md-6 mb-3">
                     <label for="adult-entry-date" class="form-label">Date</label>
                     <input type="date" class="form-control form-control-lg" id="adult-entry-date"
                            name="adult-entry-date" value="<?= $_SESSION['adult-entry-date_entry']; ?>" aria-describedby="adult-entry-date-help" required>
-                    <div id="adult-entry-date-help" class="form-text">Enter the date of your step count.</div>
+                    <div id="adult-entry-date-help" class="form-text">Enter the date of your movement count.</div>
                     <?php showErrors('adult-entry-date-errors'); ?>
                     <?php showErrors('adult-entry-exists-errors'); ?>
                 </div>
                 <div class="col-12 col-md-6 mb-3">
-                    <label for="adult-steps" class="form-label">Number of Steps</label>
+                    <label for="adult-steps" class="form-label">Number of Movements</label>
                     <input type="number" class="form-control form-control-lg" id="adult-steps" name="adult-steps"
                            value="<?= $_SESSION['adult-steps_entry']; ?>" aria-describedby="adult-steps-help" min="0" max="20,000" required>
-                    <div id="adult-steps-help" class="form-text">Enter your number of steps for this day.</div>
+                    <div id="adult-steps-help" class="form-text">Enter your number of movements for this day.</div>
                     <?php showErrors('adult-steps-errors'); ?>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit Adult Steps</button>
+                <button type="submit" class="btn btn-primary">Submit for Adult</button>
             </form>
         </div>
     </div>

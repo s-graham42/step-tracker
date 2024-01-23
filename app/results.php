@@ -1,5 +1,6 @@
 <?php
   require_once("../connection.php");
+  require_once("../constants.php");
   require_once("functions.php");
   session_start();
 
@@ -11,7 +12,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SESSFA STEP TRACKER</title>
+  <title><?= APPLICATION_TITLE; ?></title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
@@ -42,7 +43,7 @@
     </div>
   </header>
   <main class="container">
-    <h1 class="text-center my-5">SESSFA Movements Tracker</h1>
+    <h1 class="text-center my-5"><?= APPLICATION_TITLE; ?></h1>
     <div class="row">
       <div id="kid-globe-wrapper" class="col-12 col-md-6">
         <div class="text-center">
@@ -74,7 +75,7 @@
       </div>
     </div>
   </main>
-  <aside class="container mt-5">
+  <aside class="container mt-5 d-none">
       <p>Todo:</p>
       <ul>
           <li>Bigger Globe images (and circles) at Desktop.</li>
