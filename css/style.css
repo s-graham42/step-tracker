@@ -16,18 +16,27 @@ body {
  font-weight: 400;
 }
 .bg-sessfa-green {
-background-color: var(--sessfa-green)!important;
+    background-color: var(--sessfa-green)!important;
 }
 .btn-sessfa-primary {
-color: black;
-background-color: var(--sessfa-green);
-border-color: black;
+    color: black;
+    background-color: var(--sessfa-green);
+    border-color: black;
 }
+.bg-kid-form {
+    border-radius: 5px;
+    background-color: #d9f3ff;
+}
+.bg-adult-form {
+    border-radius: 5px;
+    background-color: #c5ffd1;
+}
+
 .btn-sessfa-primary:hover {
-background-color: var(--sessfa-dark-green);
+    background-color: var(--sessfa-dark-green);
 }
 .text-sessfa-light {
-color: var(--sessfa-light-blue);
+    color: var(--sessfa-light-blue);
 }
 
 img.globe {

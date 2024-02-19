@@ -44,6 +44,14 @@
   </header>
   <main class="container">
     <h1 class="text-center my-5"><?= APPLICATION_TITLE; ?></h1>
+    <div class="row flex-wrap mt-5">
+      <div class="col text-center text-nowrap ms-auto mt-5">
+          <a href="../index.php" class="col btn btn-primary btn-lg">Enter More Movements</a>
+      </div>
+<!--      <div class="col text-center text-nowrap mt-5">-->
+<!--          <a href="./results.php" class="col btn btn-success btn-lg">Visit the Results Page</a>-->
+<!--      </div>-->
+    </div>
     <div class="row">
       <div id="kid-globe-wrapper" class="col-12 col-md-6">
         <div class="text-center">

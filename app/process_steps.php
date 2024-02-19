@@ -1,6 +1,8 @@
 <?php
   require_once('../connection.php');
   require_once('functions.php');
+  require_once('../constants.php');
+  require_once("../secrets.php");
   session_start();
 
 ?>
@@ -10,8 +12,8 @@
 <?php var_dump($_SESSION); ?>
 
 <?php
-  if ( ! (isset($_POST['action']) && ($_POST['action'] == "kid-steps") || ($_POST['action'] == "adult-steps")) ) {
-      dd($_POST);
+  if ( !isset($_POST['action']) || $_POST['action'] !== "submit-steps") {
+    dd($_POST);
     session_destroy();
     header("Location: ../index.php");
     exit;
@@ -27,29 +29,47 @@
 
 //  dd($currentSession['id']);
   //  For Date Validations
-  $beginningDate = "2024-01-01";
-  $endDate = "2024-04-01";
+  $beginningDate = MOVE_A_THON_START_DATE;
+  $endDate = MOVE_A_THON_END_DATE;
 
-// KID STEPS
-  if ($_POST['action'] == 'kid-steps') {
+
+  if ($_POST['action'] == 'submit-steps') {
     //reset errors
     $_SESSION['errors'] = array();
 
-    // Step Validations
-    if (empty($_POST['kid-steps'])) {
-      $_SESSION['errors']['kid-steps-errors'][] = "Steps cannot be empty.";
+    // Password Validations
+    if (empty($_POST['input-password'])) {
+      $_SESSION['errors']['password-errors'][] = "Please enter the Move-a-thon password.";
     }
-    if (!is_numeric($_POST['kid-steps'])) {
-      $_SESSION['errors']['kid-steps-errors'][] = "Steps must be a number.";
-    }
-    if (intval($_POST['kid-steps']) < 1) {
-      $_SESSION['errors']['kid-steps-errors'][] = "Steps must be a positive integer.";
-    }
-    if (intval($_POST['kid-steps']) > 20000) {
-      $_SESSION['errors']['kid-steps-errors'][] = "Steps must be less than 20,000.";
+    else {
+      if ( !preg_match('/^[A-Za-z0-9]+$/', $_POST['input-password']) ) {
+        $_SESSION['errors']['password-errors'][] = "Password incorrect.";
+      }
+      else {
+        if ($_POST['input-password'] !== MOVE_A_THON_PASSWORD ) {
+          $_SESSION['errors']['password-errors'][] = "Password incorrect.";
+        }
+      }
     }
 
-//    Date Validations
+    // Kid Step Validations
+    if (empty($_POST['kid-steps']) && empty($_POST['adult-steps'])) {
+      $_SESSION['errors']['kid-steps-errors'][] = "Please enter steps for either a kid or an adult.";
+    }
+    elseif (!empty($_POST['kid-steps'])) {
+      if (!is_numeric($_POST['kid-steps'])) {
+        $_SESSION['errors']['kid-steps-errors'][] = "Steps must be a number.";
+      }
+      if (intval($_POST['kid-steps']) < 1) {
+        $_SESSION['errors']['kid-steps-errors'][] = "Steps must be a positive integer.";
+      }
+      if (intval($_POST['kid-steps']) > 20000) {
+        $_SESSION['errors']['kid-steps-errors'][] = "Steps must be less than 20,000.";
+      }
+    }
+
+
+//    Kid Date Validations
     if (empty($_POST['kid-entry-date'])) {
       $_SESSION['errors']['kid-entry-date-errors'][] = "Date cannot be empty.";
     }
@@ -60,57 +80,24 @@
       $_SESSION['errors']['kid-entry-date-errors'][] = "The date you entered is after the end of the Move-A-Thon.";
     }
 
-    $sessionId = intval($currentSession['id']);
-    $existing_kid_entry_query = "SELECT * FROM `kid_steps` WHERE `session` = {$sessionId} AND `steps_date` = '{$_POST['kid-entry-date']}';";
-    $kidEntryExists = fetch_all($existing_kid_entry_query);
-    if (!empty($kidEntryExists)) {
-      $_SESSION['errors']['kid-entry-exists-errors'][] = "You have already entered kid steps for this date.";
+    // Adult Step Validations
+    if (empty($_POST['adult-steps']) && empty($_POST['kid-steps'])) {
+      $_SESSION['errors']['adult-steps-errors'][] = "Please enter steps for either a kid or an adult.";
+    }
+    elseif (!empty($_POST['adult-steps'])) {
+      if (!is_numeric($_POST['adult-steps'])) {
+        $_SESSION['errors']['adult-steps-errors'][] = "Steps must be a number.";
+      }
+      if (intval($_POST['adult-steps']) < 1) {
+        $_SESSION['errors']['adult-steps-errors'][] = "Steps must be a positive integer.";
+      }
+      if (intval($_POST['adult-steps']) > 20000) {
+        $_SESSION['errors']['adult-steps-errors'][] = "Steps must be less than 20,000.";
+      }
     }
 
-    // if there are errors, supply current entries and redirect.
-    if (!empty($_SESSION['errors'])) {
-      $_SESSION['kid-steps_entry'] = $_POST['kid-steps'];
-      $_SESSION['kid-entry-date_entry'] = $_POST['kid-entry-date'];
 
-      header("Location: ../index.php");
-      exit;
-    } else {
-      // add the steps item.
-      $steps = intval($_POST['kid-steps']);
-      $stepsDate = $_POST['kid-entry-date'];
-      $sessionId = intval($currentSession['id']);
-      $query = "INSERT INTO `kid_steps` (steps, steps_date, created_at, updated_at, session) VALUES ({$steps}, '{$stepsDate}', NOW(), NOW(), {$sessionId});";
-      run_mysql_query($query);
-
-      //clean up session:
-      unset($_SESSION['kid-steps_entry']);
-      unset($_SESSION['kid-entry-date_entry']);
-
-      header("Location: ./success.php");
-      exit;
-    }
-
-  }
-
-  if ($_POST['action'] == 'adult-steps') {
-    //reset errors
-    $_SESSION['errors'] = array();
-
-    // Step Validations
-    if (empty($_POST['adult-steps'])) {
-      $_SESSION['errors']['adult-steps-errors'][] = "Steps cannot be empty.";
-    }
-    if (!is_numeric($_POST['adult-steps'])) {
-      $_SESSION['errors']['adult-steps-errors'][] = "Steps must be a number.";
-    }
-    if (intval($_POST['adult-steps']) < 1) {
-      $_SESSION['errors']['adult-steps-errors'][] = "Steps must be a positive integer.";
-    }
-    if (intval($_POST['adult-steps']) > 20000) {
-      $_SESSION['errors']['adult-steps-errors'][] = "Steps must be less than 20,000.";
-    }
-
-//    Date Validations
+//    Adult Date Validations
     if (empty($_POST['adult-entry-date'])) {
       $_SESSION['errors']['adult-entry-date-errors'][] = "Date cannot be empty.";
     }
@@ -121,37 +108,70 @@
       $_SESSION['errors']['adult-entry-date-errors'][] = "The date you entered is after the end of the Move-A-Thon.";
     }
 
-    $sessionId = intval($currentSession['id']);
-    $existing_adult_entry_query = "SELECT * FROM `adult_steps` WHERE `session` = {$sessionId} AND `steps_date` = '{$_POST['adult-entry-date']}';";
-    $adultEntryExists = fetch_all($existing_adult_entry_query);
-    if (!empty($adultEntryExists)) {
-      $_SESSION['errors']['adult-entry-exists-errors'][] = "You have already entered adult steps for this date.";
+//    ENTRY EXISTS STUFF
+    // Kid Entry Exists Validation
+    if (!empty($_POST['kid-steps'])) {
+      $sessionId = intval($currentSession['id']);
+      $existing_kid_entry_query = "SELECT * FROM `kid_steps` WHERE `session` = {$sessionId} AND `steps_date` = '{$_POST['kid-entry-date']}';";
+      $kidEntryExists = fetch_all($existing_kid_entry_query);
+      if (!empty($kidEntryExists)) {
+        $_SESSION['errors']['kid-entry-exists-errors'][] = "You have already entered kid steps for this date.";
+      }
+    }
+
+    // Adult Entry Exists Validation
+    if (!empty($_POST['adult-steps'])) {
+      $sessionId = intval($currentSession['id']);
+      $existing_adult_entry_query = "SELECT * FROM `adult_steps` WHERE `session` = {$sessionId} AND `steps_date` = '{$_POST['adult-entry-date']}';";
+      $adultEntryExists = fetch_all($existing_adult_entry_query);
+      if (!empty($adultEntryExists)) {
+        $_SESSION['errors']['adult-entry-exists-errors'][] = "You have already entered adult steps for this date.";
+      }
     }
 
     // if there are errors, supply current entries and redirect.
     if (!empty($_SESSION['errors'])) {
+      $_SESSION['kid-steps_entry'] = $_POST['kid-steps'];
+      $_SESSION['kid-entry-date_entry'] = $_POST['kid-entry-date'];
       $_SESSION['adult-steps_entry'] = $_POST['adult-steps'];
       $_SESSION['adult-entry-date_entry'] = $_POST['adult-entry-date'];
+      $_SESSION['input-password_entry'] = $_POST['input-password'];
 
       header("Location: ../index.php");
       exit;
     } else {
-      // add the steps item.
-      $steps = intval($_POST['adult-steps']);
-      $stepsDate = $_POST['adult-entry-date'];
-      $sessionId = intval($currentSession['id']);
-      $query = "INSERT INTO `adult_steps` (steps, steps_date, created_at, updated_at, session) VALUES ({$steps}, '{$stepsDate}', NOW(), NOW(), {$sessionId});";
-      run_mysql_query($query);
+      // add the kid steps item if it exists.
+      if (!empty($_POST['kid-steps'])) {
+        $steps = intval($_POST['kid-steps']);
+        $stepsDate = $_POST['kid-entry-date'];
+        $sessionId = intval($currentSession['id']);
+        $query = "INSERT INTO `kid_steps` (steps, steps_date, created_at, updated_at, session) VALUES ({$steps}, '{$stepsDate}', NOW(), NOW(), {$sessionId});";
+        run_mysql_query($query);
+      }
+
+      // add the adult steps item if it exists.
+      if (!empty($_POST['adult-steps'])) {
+        $steps = intval($_POST['adult-steps']);
+        $stepsDate = $_POST['adult-entry-date'];
+        $sessionId = intval($currentSession['id']);
+        $query = "INSERT INTO `adult_steps` (steps, steps_date, created_at, updated_at, session) VALUES ({$steps}, '{$stepsDate}', NOW(), NOW(), {$sessionId});";
+        run_mysql_query($query);
+      }
 
       //clean up session:
+      unset($_SESSION['kid-steps_entry']);
+      unset($_SESSION['kid-entry-date_entry']);
       unset($_SESSION['adult-steps_entry']);
       unset($_SESSION['adult-entry-date_entry']);
+      unset($_SESSION['input-password_entry']);
 
-      header("Location: ./success.php");
+      header("Location: ./results.php");
       exit;
     }
 
   }
+
+
 
 
 
