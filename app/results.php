@@ -50,7 +50,7 @@
           <h1>Kid Moves</h1>
           <div id="tracker">
 <!--          <img class="globe" src="../images/blue-marble.png" width="630px" style="position: absolute; left: calc(50% - 315px); padding-top: 85px;">-->
-            <img class="globe" src="../images/blue-marble.png">
+            <img class="globe" src="../images/globe_north_america_800x800.png">
             <div id="kid-circle1" class="circles circle1"></div>
             <div id="kid-circle2" class="circles circle2"></div>
             <div id="kid-circle3" class="circles circle3"></div>
@@ -64,7 +64,7 @@
           <h1>Adult Moves</h1>
           <div id="tracker">
             <!--          <img class="globe" src="../images/blue-marble.png" width="630px" style="position: absolute; left: calc(50% - 315px); padding-top: 85px;">-->
-            <img class="globe" src="../images/blue-marble.png">
+            <img class="globe" src="../images/globe_north_america_800x800.png">
             <div id="adult-circle1" class="circles circle1"></div>
             <div id="adult-circle2" class="circles circle2"></div>
             <div id="adult-circle3" class="circles circle3"></div>
