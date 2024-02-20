@@ -62,3 +62,17 @@
       }
     }
   }
+
+  // Get sum of a single column.  We're gonna assume we get only one result
+  // in our array and just return the 0 index value.
+  function get_sum($column, $table) {
+    global $connection;
+    $query = "SELECT SUM({$column}) AS total_steps FROM `{$table}`;";
+    $queryResult = $connection->query($query);
+    $result = [];
+    while ($row = mysqli_fetch_assoc($queryResult))
+    {
+      $result[] =  $row['total_steps'];
+    }
+    return $result[0];
+  }

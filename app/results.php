@@ -18,6 +18,24 @@
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
   <link rel="stylesheet" href="../css/style.css">
 </head>
+<?php
+
+  $kidSteps = get_sum('steps', 'kid_steps');
+  $adultSteps = get_sum('steps', 'adult_steps');
+  $kidGoalPercent = (intval($kidSteps) / MOVEMENT_GOAL) * 100;
+  $adultGoalPercent = (intval($adultSteps) / MOVEMENT_GOAL) * 100;
+//  var_dump($kidSteps);
+//  var_dump($adultSteps);
+//  var_dump($kidGoalPercent);
+//  var_dump($adultGoalPercent);
+  $wholeKidRings = floor($kidGoalPercent / 100);
+  $lastKidRing = ($kidGoalPercent / 100) - $wholeKidRings;
+  $wholeAdultRings = floor($adultGoalPercent / 100);
+  $lastAdultRing = ($adultGoalPercent / 100) - $wholeAdultRings;
+//  var_dump($wholeKidRings . " and " . $lastKidRing);
+//  var_dump($wholeAdultRings . " and " . $lastAdultRing);
+
+?>
 
 <body>
   <style>
@@ -44,20 +62,17 @@
   </header>
   <main class="container">
     <h1 class="text-center my-5"><?= APPLICATION_TITLE; ?></h1>
-    <div class="row flex-wrap mt-5">
-      <div class="col text-center text-nowrap ms-auto mt-5">
-          <a href="../index.php" class="col btn btn-primary btn-lg">Enter More Movements</a>
-      </div>
-<!--      <div class="col text-center text-nowrap mt-5">-->
-<!--          <a href="./results.php" class="col btn btn-success btn-lg">Visit the Results Page</a>-->
-<!--      </div>-->
-    </div>
-    <div class="row">
+    <div class="row mt-5">
       <div id="kid-globe-wrapper" class="col-12 col-md-6">
         <div class="text-center">
-          <h1>Kid Moves</h1>
+          <h2 class="fw-bolder">Kid Moves</h2>
+          <div>
+            <h3 id="kid-steps-total">Total:  <strong><?= number_format(intval($kidSteps)); ?></strong> meters</h3>
+          </div>
+          <div>
+            <h3><strong><?= number_format($kidGoalPercent); ?>%</strong> of the Goal!</h3>
+          </div>
           <div id="tracker">
-<!--          <img class="globe" src="../images/blue-marble.png" width="630px" style="position: absolute; left: calc(50% - 315px); padding-top: 85px;">-->
             <img class="globe" src="../images/globe_north_america_800x800.png">
             <div id="kid-circle1" class="circles circle1"></div>
             <div id="kid-circle2" class="circles circle2"></div>
@@ -69,9 +84,14 @@
       </div>
       <div id="adult-globe-wrapper"  class="col-12 col-md-6 mt-5 mt-md-0">
         <div class="text-center mt-5 mt-md-0">
-          <h1>Adult Moves</h1>
+          <h2 class="fw-bolder">Adult Moves</h2>
+            <div>
+                <h3>Total:  <strong><?= number_format(intval($adultSteps)); ?></strong> meters</h3>
+            </div>
+            <div>
+                <h3><strong><?= number_format($adultGoalPercent); ?>%</strong> of the Goal!</h3>
+            </div>
           <div id="tracker">
-            <!--          <img class="globe" src="../images/blue-marble.png" width="630px" style="position: absolute; left: calc(50% - 315px); padding-top: 85px;">-->
             <img class="globe" src="../images/globe_north_america_800x800.png">
             <div id="adult-circle1" class="circles circle1"></div>
             <div id="adult-circle2" class="circles circle2"></div>
@@ -80,6 +100,11 @@
             <div id="adult-circle5" class="circles circle5"></div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row flex-wrap mt-5">
+      <div class="col text-center text-nowrap">
+        <a href="../index.php" class="col btn btn-primary btn-lg">Enter More Movements</a>
       </div>
     </div>
   </main>
@@ -104,150 +129,59 @@
   <script src="../node_modules/jquery-circle-progress/dist/circle-progress.js"></script>
   <script>
     $(function(){
-        // 1st Circles
-      $('#kid-circle1').circleProgress({
-        value: 1,
-        size: 240,
-        thickness: 10,
-        startAngle: -Math.PI / 2,
-        lineCap: 'round',
-        fill: "#005E73",
-        emptyFill: '#ffffff',
-        animation: {
-          duration: 2000,
+
+        // Circle Stuff
+        const kidGoalPercent = <?= ($kidGoalPercent / 100) ?>;
+        const adultGoalPercent = <?= ($adultGoalPercent / 100) ?>;
+
+        let ringColors = ["#005E73", "#007480", "#008A79", "#009D5E", "#10AE2F", "#10AE2F"];
+
+        let maxRings = Math.max(Math.ceil(kidGoalPercent), Math.ceil(adultGoalPercent));
+
+        function runCircles(idx) {
+            let timeoutTime = (2000 * idx);
+            let kidElementName = "#kid-circle" + (idx + 1);
+            let adultElementName = "#adult-circle" + (idx + 1);
+
+            setTimeout( function() {
+                if (kidGoalPercent > idx) {
+                    $(kidElementName).circleProgress({
+                        value: (kidGoalPercent > (idx + 1)) ? 1 : kidGoalPercent - idx,
+                        size: 240 + (idx * 20),
+                        thickness: 10,
+                        startAngle: -Math.PI / 2,
+                        lineCap: 'round',
+                        fill: ringColors[idx],
+                        emptyFill: '#ffffff',
+                        animation: {
+                            duration: 2000,
+                        },
+                    });
+                }
+                if (adultGoalPercent > idx) {
+                    $(adultElementName).circleProgress({
+                        value: (adultGoalPercent > (idx + 1) ? 1 : adultGoalPercent - idx),
+                        size: 240 + (idx * 20),
+                        thickness: 10,
+                        startAngle: -Math.PI / 2,
+                        lineCap: 'round',
+                        fill: ringColors[idx],
+                        emptyFill: '#ffffff',
+                        animation: {
+                            duration: 2000,
+                        }
+                    });
+                }
+
+            }, timeoutTime);
         }
-      });
 
-      $('#adult-circle1').circleProgress({
-        value: 1,
-        size: 240,
-        thickness: 10,
-        startAngle: -Math.PI / 2,
-        lineCap: 'round',
-        fill: "#005E73",
-        emptyFill: '#ffffff',
-        animation: {
-          duration: 2000,
+        // Run the actual circle function.
+        for (let i = 0; i < maxRings; i++) {
+            runCircles(i);
         }
-      });
-
-        // 2nd Circles
-      setTimeout( function() {
-        $('#kid-circle2').circleProgress({
-          value: 1,
-          size: 260,
-          thickness: 10,
-          startAngle: -Math.PI / 2,
-          lineCap: 'round',
-          fill: "#007480",
-          emptyFill: '#ffffff',
-          animation: {
-            duration: 2000,
-          }
-        });
-
-        $('#adult-circle2').circleProgress({
-          value: 1,
-          size: 260,
-          thickness: 10,
-          startAngle: -Math.PI / 2,
-          lineCap: 'round',
-          fill: "#007480",
-          emptyFill: '#ffffff',
-          animation: {
-            duration: 2000,
-          }
-        });
-      }, 2000);
-
-        // 3rd Circles
-      setTimeout( function() {
-        $('#kid-circle3').circleProgress({
-          value: 1,
-          size: 280,
-          thickness: 10,
-          startAngle: -Math.PI / 2,
-          lineCap: 'round',
-          fill: "#008A79",
-          emptyFill: '#ffffff',
-          animation: {
-            duration: 2000,
-          }
-        });
-        $('#adult-circle3').circleProgress({
-          value: 0.55,
-          size: 280,
-          thickness: 10,
-          startAngle: -Math.PI / 2,
-          lineCap: 'round',
-          fill: "#008A79",
-          emptyFill: '#ffffff',
-          animation: {
-            duration: 2000,
-          }
-        });
-      }, 4000);
-
-      // 4th circles
-      setTimeout( function() {
-        $('#kid-circle4').circleProgress({
-          value: 1,
-          size: 300,
-          thickness: 10,
-          startAngle: -Math.PI / 2,
-          lineCap: 'round',
-          fill: "#009D5E",
-          emptyFill: '#ffffff',
-          animation: {
-            duration: 2000,
-          }
-        });
-        $('#adult-circle4').circleProgress({
-          value: 0,
-          size: 300,
-          thickness: 10,
-          startAngle: -Math.PI / 2,
-          lineCap: 'round',
-          fill: "#009D5E",
-          emptyFill: '#ffffff',
-          animation: {
-            duration: 2000,
-          }
-        });
-      }, 6000);
-
-      // 5th circles
-      setTimeout( function() {
-        $('#kid-circle5').circleProgress({
-          value: 0.72,
-          size: 320,
-          thickness: 10,
-          startAngle: -Math.PI / 2,
-          lineCap: 'round',
-          fill: "#10AE2F",
-          emptyFill: '#ffffff',
-          animation: {
-            duration: 2000,
-          }
-        });
-        $('#adult-circle5').circleProgress({
-          value: 0,
-          size: 320,
-          thickness: 10,
-          startAngle: -Math.PI / 2,
-          lineCap: 'round',
-          fill: "#10AE2F",
-          emptyFill: '#ffffff',
-          animation: {
-            duration: 2000,
-          }
-        });
-
-      }, 8000);
 
     });
-
-
 
 
   </script>
