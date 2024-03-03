@@ -39,6 +39,10 @@ body {
     color: var(--sessfa-light-blue);
 }
 
+.btn.goto-results {
+    max-width: 220px;
+}
+
 img.globe {
     height: 252px;
     width: 252px;

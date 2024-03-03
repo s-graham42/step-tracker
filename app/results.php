@@ -134,7 +134,8 @@
         const kidGoalPercent = <?= ($kidGoalPercent / 100) ?>;
         const adultGoalPercent = <?= ($adultGoalPercent / 100) ?>;
 
-        let ringColors = ["#005E73", "#007480", "#008A79", "#009D5E", "#10AE2F", "#10AE2F"];
+        // let ringColors = ["#005E73", "#007480", "#008A79", "#009D5E", "#10AE2F", "#10AE2F"];
+        let ringColors = ["#10AE2F", "#009D5E", "#008A79", "#007480", "#005E73", "#005E73"];
 
         let maxRings = Math.max(Math.ceil(kidGoalPercent), Math.ceil(adultGoalPercent));
 

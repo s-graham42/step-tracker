@@ -57,7 +57,10 @@
     </div>
 </header>
 <main class="container">
-    <h1 class="text-center my-5"><?= APPLICATION_TITLE; ?></h1>
+    <h1 class="text-center mt-5 mb-3"><?= APPLICATION_TITLE; ?></h1>
+    <div class="row mb-5">
+        <a class="goto-results btn btn-success mb-3 mx-auto" href="/app/results.php">Go to Results</a>
+    </div>
 
     <form action="app/process_steps.php" method="post">
         <input type="hidden" name="action" value="submit-steps">
