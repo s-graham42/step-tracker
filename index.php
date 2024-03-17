@@ -49,9 +49,7 @@
                         Fundraising Alliance</a></h1>
             </div>
             <div class="col-12 col-lg-2 align-self-center text-center text-md-end">
-                <a class="btn btn-sessfa-primary"
-                   href="https://secure.givelively.org/donate/alliance-for-education/se-seattle-schools-fundraising-alliance-3rd-annual-move-a-thon">Click
-                    to Donate!</a>
+                <a class="btn btn-sessfa-primary" href="<?= DONATE_LINK ?>">Click to Donate!</a>
             </div>
         </div>
     </div>
@@ -68,40 +66,40 @@
         <div class="row form-wrapper justify-content-around">
             <!--                Kid section-->
             <div class="col-12 col-md-5 p-4 bg-kid-form">
-                <h2 class="text-center">Kids enter movements here!</h2>
+                <h2 class="text-center">Kids enter steps here!</h2>
                 <div class="date-input-wrapper mt-4">
                     <label for="kid-entry-date" class="form-label">Date</label>
                     <input type="date" class="form-control form-control-lg" id="kid-entry-date" name="kid-entry-date"
                            value="<?= $_SESSION['kid-entry-date_entry']; ?>" aria-describedby="kid-entry-date-help" required>
-                    <div id="kid-entry-date-help" class="form-text">Enter the date of your movement count.</div>
+                    <div id="kid-entry-date-help" class="form-text">Enter the date of your step count.</div>
                     <?php showErrors('kid-entry-date-errors'); ?>
                     <?php showErrors('kid-entry-exists-errors'); ?>
                 </div>
                 <div class="moves-input-wrapper mt-4">
-                    <label for="kid-steps" class="form-label">Number of Movements</label>
+                    <label for="kid-steps" class="form-label">Number of Steps</label>
                     <input type="number" class="form-control form-control-lg" id="kid-steps" name="kid-steps"
-                           value="<?= $_SESSION['kid-steps_entry']; ?>" aria-describedby="kid-steps-help" min="0" max="30,000">
-                    <div id="kid-steps-help" class="form-text">Enter your number of movements for this day.</div>
+                           value="<?= $_SESSION['kid-steps_entry']; ?>" aria-describedby="kid-steps-help" min="0" max="50000">
+                    <div id="kid-steps-help" class="form-text">Enter your number of steps for this day.</div>
                     <?php showErrors('kid-steps-errors'); ?>
                 </div>
             </div>
 
 <!--                Adult Section                -->
             <div class="col-12 col-md-5 p-4 mt-5 mt-md-0 bg-adult-form">
-                <h2 class="text-center">Adults enter movements here!</h2>
+                <h2 class="text-center">Adults enter steps here!</h2>
                 <div class="date-input-wrapper mt-4">
                     <label for="adult-entry-date" class="form-label">Date</label>
                     <input type="date" class="form-control form-control-lg" id="adult-entry-date"
                            name="adult-entry-date" value="<?= $_SESSION['adult-entry-date_entry']; ?>" aria-describedby="adult-entry-date-help" required>
-                    <div id="adult-entry-date-help" class="form-text">Enter the date of your movement count.</div>
+                    <div id="adult-entry-date-help" class="form-text">Enter the date of your step count.</div>
                     <?php showErrors('adult-entry-date-errors'); ?>
                     <?php showErrors('adult-entry-exists-errors'); ?>
                 </div>
                 <div class="moves-input-wrapper mt-4">
-                    <label for="adult-steps" class="form-label">Number of Movements</label>
+                    <label for="adult-steps" class="form-label">Number of Steps</label>
                     <input type="number" class="form-control form-control-lg" id="adult-steps" name="adult-steps"
-                           value="<?= $_SESSION['adult-steps_entry']; ?>" aria-describedby="adult-steps-help" min="0" max="30,000">
-                    <div id="adult-steps-help" class="form-text">Enter your number of movements for this day.</div>
+                           value="<?= $_SESSION['adult-steps_entry']; ?>" aria-describedby="adult-steps-help" min="0" max="50000">
+                    <div id="adult-steps-help" class="form-text">Enter your number of steps for this day.</div>
                     <?php showErrors('adult-steps-errors'); ?>
                 </div>
             </div>
