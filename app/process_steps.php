@@ -63,7 +63,7 @@
       if (intval($_POST['kid-steps']) < 1) {
         $_SESSION['errors']['kid-steps-errors'][] = "Steps must be a positive integer.";
       }
-      if (intval($_POST['kid-steps']) > 20000) {
+      if (intval($_POST['kid-steps']) > MAX_DAILY_STEPS) {
         $_SESSION['errors']['kid-steps-errors'][] = "Steps must be less than 20,000.";
       }
     }
@@ -91,7 +91,7 @@
       if (intval($_POST['adult-steps']) < 1) {
         $_SESSION['errors']['adult-steps-errors'][] = "Steps must be a positive integer.";
       }
-      if (intval($_POST['adult-steps']) > 20000) {
+      if (intval($_POST['adult-steps']) > MAX_DAILY_STEPS) {
         $_SESSION['errors']['adult-steps-errors'][] = "Steps must be less than 20,000.";
       }
     }
