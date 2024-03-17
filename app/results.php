@@ -2,7 +2,10 @@
   require_once("../connection.php");
   require_once("../constants.php");
   require_once("functions.php");
+  require_once("AroundTheWorld.php");
   session_start();
+
+  $aroundTheWorld = new AroundTheWorld();
 
 ?>
 
@@ -24,16 +27,11 @@
   $adultSteps = get_sum('steps', 'adult_steps');
   $kidGoalPercent = (intval($kidSteps) / MOVEMENT_GOAL) * 100;
   $adultGoalPercent = (intval($adultSteps) / MOVEMENT_GOAL) * 100;
-//  var_dump($kidSteps);
-//  var_dump($adultSteps);
-//  var_dump($kidGoalPercent);
-//  var_dump($adultGoalPercent);
+
   $wholeKidRings = floor($kidGoalPercent / 100);
   $lastKidRing = ($kidGoalPercent / 100) - $wholeKidRings;
   $wholeAdultRings = floor($adultGoalPercent / 100);
   $lastAdultRing = ($adultGoalPercent / 100) - $wholeAdultRings;
-//  var_dump($wholeKidRings . " and " . $lastKidRing);
-//  var_dump($wholeAdultRings . " and " . $lastAdultRing);
 
 ?>
 
@@ -54,20 +52,22 @@
           <h1><a href="https://www.sessfa.org/" class="text-dark text-decoration-none">Southeast Seattle Schools Fundraising Alliance</a></h1>
         </div>
         <div class="col-12 col-lg-2 align-self-center text-center text-md-end">
-          <a class="btn btn-sessfa-primary"
-            href="https://secure.givelively.org/donate/alliance-for-education/se-seattle-schools-fundraising-alliance-3rd-annual-move-a-thon">Click to Donate!</a>
+            <a class="btn btn-sessfa-primary" href="<?= DONATE_LINK ?>">Click to Donate!</a>
+
         </div>
       </div>
     </div>
   </header>
   <main class="container">
     <h1 class="text-center my-5"><?= APPLICATION_TITLE; ?></h1>
+      <h2 class="text-center my-2">Goal: All the way around the world!</h2>
+      <h3 class="text-center my-2">Seattle to Seattle: <?= number_format(intval($aroundTheWorld->circumnavigateMiles)) ?> miles (<?= number_format(intval($aroundTheWorld->circumnavigateSteps)) ?> steps).</h3>
     <div class="row mt-5">
       <div id="kid-globe-wrapper" class="col-12 col-md-6">
         <div class="text-center">
-          <h2 class="fw-bolder">Kid Moves</h2>
+          <h2 class="fw-bolder">Kid Steps</h2>
           <div>
-            <h3 id="kid-steps-total">Total:  <strong><?= number_format(intval($kidSteps)); ?></strong> meters</h3>
+            <h3 id="kid-steps-total">Total:  <strong><?= number_format(intval($kidSteps)); ?></strong> steps</h3>
           </div>
           <div>
             <h3><strong><?= number_format($kidGoalPercent); ?>%</strong> of the Goal!</h3>
@@ -84,12 +84,12 @@
       </div>
       <div id="adult-globe-wrapper"  class="col-12 col-md-6 mt-5 mt-md-0">
         <div class="text-center mt-5 mt-md-0">
-          <h2 class="fw-bolder">Adult Moves</h2>
+          <h2 class="fw-bolder">Adult Steps</h2>
             <div>
-                <h3>Total:  <strong><?= number_format(intval($adultSteps)); ?></strong> meters</h3>
+                <h3>Total:  <span class="fw-bolder"><?= number_format(intval($adultSteps)); ?></span> steps</h3>
             </div>
             <div>
-                <h3><strong><?= number_format($adultGoalPercent); ?>%</strong> of the Goal!</h3>
+                <h3><span class="fw-bolder"><?= number_format($adultGoalPercent); ?>%</span> of the Goal!</h3>
             </div>
           <div id="tracker">
             <img class="globe" src="../images/globe_north_america_800x800.png">
@@ -104,21 +104,73 @@
     </div>
     <div class="row flex-wrap mt-5">
       <div class="col text-center text-nowrap">
-        <a href="../index.php" class="col btn btn-primary btn-lg">Enter More Movements</a>
+        <a href="../index.php" class="col btn btn-primary btn-lg">Enter More Steps</a>
       </div>
     </div>
+
+    <?php
+      $kidStepsInMiles = $aroundTheWorld->stepsToMiles(intval($kidSteps));
+      $closestKidCity = $aroundTheWorld->getClosestCity($kidStepsInMiles);
+
+      $adultStepsInMiles = $aroundTheWorld->stepsToMiles(intval($adultSteps));
+      $closestAdultCity = $aroundTheWorld->getClosestCity($adultStepsInMiles);
+
+      $minimumDistance = 1460;
+      if ($kidStepsInMiles > $minimumDistance || $adultStepsInMiles > $minimumDistance) {
+    ?>
+
+    <div id="around-the-world-wrapper" class="row mt-5">
+        <div class="col-12 col-md-6">
+            <?php if ($kidStepsInMiles > $minimumDistance) { ?>
+                <h3 class="text-center">
+                    Together, the <span class="fw-bolder">kids</span> have traveled<br>
+                    <?= $kidStepsInMiles ?> miles<br>
+                    and <?= $closestKidCity['message'] ?>:
+                    <a class="fw-bolder" href="<?= $closestKidCity['closest_city']['maps_link'] ?>"><?= $closestKidCity['closest_city']['name'] ?>!</a>
+                </h3>
+            <?php } ?>
+        </div>
+        <div class="col-12 col-md-6 order-4 order-md-2">
+            <?php if ($adultStepsInMiles > $minimumDistance) { ?>
+                <h3 class="text-center">
+                    Together, the <span class="fw-bolder">adults</span> have traveled<br>
+                    <?= $adultStepsInMiles ?> miles<br>
+                    and <?= $closestAdultCity['message'] ?>:
+                    <a class="fw-bolder" href="<?= $closestAdultCity['closest_city']['maps_link'] ?>"><?= $closestAdultCity['closest_city']['name'] ?>!</a>
+                </h3>
+            <?php } ?>
+        </div>
+        <div class="col-12 col-md-6 order-3">
+          <?php if ($kidStepsInMiles > $minimumDistance) { ?>
+              <div class="mt-4 px-0 py-3 px-lg-5">
+                  <iframe src="<?= $closestKidCity['closest_city']['embed_link'] ?>" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+          <?php } ?>
+        </div>
+        <div class="col-12 col-md-6 order-5">
+          <?php if ($adultStepsInMiles > $minimumDistance) { ?>
+              <div class="mt-4 px-0 py-3 px-lg-5">
+                  <iframe src="<?= $closestAdultCity['closest_city']['embed_link'] ?>" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+          <?php } ?>
+        </div>
+
+<!--      --><?php //echo '<pre>'; var_dump($closestKidCity); echo '</pre>' ?>
+<!--      --><?php //echo '<pre>'; var_dump($closestAdultCity); echo '</pre>' ?>
+
+    </div>
+
+    <?php } ?>
+
+
+
   </main>
   <footer style="width:100%; height:100px;"></footer>
   <aside class="container mt-5 d-none">
       <p>Todo:</p>
       <ul>
           <li>Bigger Globe images (and circles) at Desktop.</li>
-          <li>Better globe image with no clouds.</li>
-          <li>Better js code for circles to handle timeout (and padding?)</li>
           <li>Continue working on responsiveness from 320px</li>
-          <li>Incorporate DB value sums as circle progress.</li>
-          <li>Total Steps</li>
-          <li>Percentage of Goal.</li>
           <li>Confetti</li>
       </ul>
   </aside>
