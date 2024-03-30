@@ -42,13 +42,22 @@ body {
 .btn.goto-results {
     max-width: 220px;
 }
+img.globe-coming-soon {
+    height: 252px;
+    width: 252px;
+}
+@media screen and (min-width: 480px) {
+    img.globe-coming-soon {
+        height: 400px;
+        width: 400px;
+    }
+}
 
 img.globe {
     height: 252px;
     width: 252px;
     display: inline-block;
     position: relative;
-    /*left: calc(50% - 126px);*/
     margin-top: 50px;
 }
 .circles {

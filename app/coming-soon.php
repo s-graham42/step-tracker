@@ -25,12 +25,12 @@
 
 <body>
 
-<main class="container mt-5">
-    <h2 class="text-center my-4 p-4 fw-bold rounded bg-sessfa-green">Get ready to move around the world with us!</h2>
-    <div class="col text-center text-nowrap mt-5">
-        <img class="globe" src="../images/globe_north_america_800x800.png" alt="A true color image of the Earth" />
+<main class="container-fluid mt-3">
+    <h2 class="text-center p-4 fw-bold rounded bg-sessfa-green">Get ready to move around the world with us!</h2>
+    <div class="col text-center text-nowrap">
+        <img class="globe-coming-soon" src="../images/globe_north_america_800x800.png" alt="A true color image of the Earth" />
     </div>
-    <div class="col text-center px-5 mt-5">
+    <div class="col text-center px-2 px-md-3 px-lg-5 mt-3">
         <p class="fs-4 fw-bold text-success">This year we are adding a new challenge to the Move-a-thon. We will be counting our
             steps as we move in all sorts of ways. Whether you are walking, running, rolling, or
             doing cartwheels, have the pedometer you are given on your body or wheels to track
