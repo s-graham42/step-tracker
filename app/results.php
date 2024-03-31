@@ -111,13 +111,29 @@
     </div>
 
     <?php
-      $kidStepsInMiles = $aroundTheWorld->stepsToMiles(intval($kidSteps));
+      $kidLap = intdiv($kidSteps, MOVEMENT_GOAL);
+      if ($kidLap > 0) {
+          $kidLapSteps = $kidSteps - ($kidLap * MOVEMENT_GOAL);
+      }
+      else {
+          $kidLapSteps = $kidSteps;
+      }
+      $kidStepsInMiles = $aroundTheWorld->stepsToMiles(intval($kidLapSteps));
       $closestKidCity = $aroundTheWorld->getClosestCity($kidStepsInMiles);
+      $kidLapMessage = $aroundTheWorld->getLapMessage($kidLap, "kids");
 
-      $adultStepsInMiles = $aroundTheWorld->stepsToMiles(intval($adultSteps));
+      $adultLap = intdiv($adultSteps, MOVEMENT_GOAL);
+      if ($adultLap > 0) {
+        $adultLapSteps = $adultSteps - ($adultLap * MOVEMENT_GOAL);
+      }
+      else {
+        $adultLapSteps = $adultSteps;
+      }
+      $adultStepsInMiles = $aroundTheWorld->stepsToMiles(intval($adultLapSteps));
       $closestAdultCity = $aroundTheWorld->getClosestCity($adultStepsInMiles);
+      $adultLapMessage = $aroundTheWorld->getLapMessage($adultLap, "adults");
 
-      $minimumDistance = 1460;
+      $minimumDistance = 204;
       if ($kidStepsInMiles > $minimumDistance || $adultStepsInMiles > $minimumDistance) {
     ?>
 
@@ -126,6 +142,7 @@
             <?php if ($kidStepsInMiles > $minimumDistance) { ?>
                 <h3 class="text-center">
                     Together, the <span class="fw-bolder">kids</span> have traveled<br>
+                    <?= $kidLapMessage ?>
                     <?= $kidStepsInMiles ?> miles<br>
                     and <?= $closestKidCity['message'] ?>:
                     <a class="fw-bolder" href="<?= $closestKidCity['closest_city']['maps_link'] ?>"><?= $closestKidCity['closest_city']['name'] ?>!</a>
@@ -136,6 +153,7 @@
             <?php if ($adultStepsInMiles > $minimumDistance) { ?>
                 <h3 class="text-center">
                     Together, the <span class="fw-bolder">adults</span> have traveled<br>
+                    <?= $adultLapMessage ?>
                     <?= $adultStepsInMiles ?> miles<br>
                     and <?= $closestAdultCity['message'] ?>:
                     <a class="fw-bolder" href="<?= $closestAdultCity['closest_city']['maps_link'] ?>"><?= $closestAdultCity['closest_city']['name'] ?>!</a>
@@ -189,7 +207,7 @@
         const adultGoalPercent = <?= ($adultGoalPercent / 100) ?>;
 
         // let ringColors = ["#005E73", "#007480", "#008A79", "#009D5E", "#10AE2F", "#10AE2F"];
-        let ringColors = ["#10AE2F", "#009D5E", "#008A79", "#007480", "#005E73", "#005E73"];
+        let ringColors = ["#10AE2F", "#009D5E", "#008A79", "#007480", "#005E73", "#005E73", "#10AE2F", "#009D5E", "#008A79", "#007480", "#005E73", "#005E73"];
 
         let maxRings = Math.max(Math.ceil(kidGoalPercent), Math.ceil(adultGoalPercent));
 

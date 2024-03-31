@@ -46,7 +46,7 @@
         $_SESSION['errors']['password-errors'][] = "Password incorrect.";
       }
       else {
-        if ($_POST['input-password'] !== MOVE_A_THON_PASSWORD ) {
+        if (strtoupper($_POST['input-password']) !== MOVE_A_THON_PASSWORD) {
           $_SESSION['errors']['password-errors'][] = "Password incorrect.";
         }
       }

@@ -133,6 +133,27 @@ class AroundTheWorld {
     }
   }
 
+  /**
+   * Gets text for if participants go around the world 1 or more times.
+   *
+   * @param int $lap
+   * @param string $participants
+   * @return string
+   */
+  public function getLapMessage(int $lap, string $participants) {
+    $message = "";
+
+    if ($lap == 1) {
+      $message = "around the world <strong>1 full time!</strong><br><br>The $participants have passed Seattle again,<br> have traveled";
+    }
+    elseif ($lap > 1) {
+      $message = "around the world <strong>$lap full times!</strong><br><br>The $participants have passed Seattle again,<br> have traveled";
+    }
+
+    return $message;
+  }
+
+
   public function __construct() {
     $this->messages = [
       'almost_to' => "are almost to",
@@ -151,7 +172,7 @@ class AroundTheWorld {
         "embed_link" => "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d172139.0908878342!2d-122.34206439999998!3d47.61304199999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5490102c93e83355%3A0x102565466944d59a!2sSeattle%2C%20WA!5e0!3m2!1sen!2sus!4v1710698983996!5m2!1sen!2sus",
       ],
       1 => [
-        "name" => "Idaho, Boise, Idaho",
+        "name" => "Boise, Idaho",
         "distance" => 406,
         "maps_link" => "https://www.google.com/maps/place/Boise,+ID/@43.6007765,-116.316298,12z/data=!3m1!4b1!4m6!3m5!1s0x54aef172e947b49d:0x9a5b989b36679d9b!8m2!3d43.6150186!4d-116.2023137!16zL20vMDk5dHk?entry=ttu",
         "embed_link" => "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92456.81444603353!2d-116.233898!3d43.60080605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54aef172e947b49d%3A0x9a5b989b36679d9b!2sBoise%2C%20ID!5e0!3m2!1sen!2sus!4v1711598812234!5m2!1sen!2sus",
