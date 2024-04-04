@@ -38,19 +38,19 @@
     $_SESSION['errors'] = array();
 
     // Password Validations
-    if (empty($_POST['input-password'])) {
-      $_SESSION['errors']['password-errors'][] = "Please enter the Move-a-thon password.";
-    }
-    else {
-      if ( !preg_match('/^[A-Za-z0-9]+$/', $_POST['input-password']) ) {
-        $_SESSION['errors']['password-errors'][] = "Password incorrect.";
-      }
-      else {
-        if (strtoupper($_POST['input-password']) !== MOVE_A_THON_PASSWORD) {
-          $_SESSION['errors']['password-errors'][] = "Password incorrect.";
-        }
-      }
-    }
+//    if (empty($_POST['input-password'])) {
+//      $_SESSION['errors']['password-errors'][] = "Please enter the Move-a-thon password.";
+//    }
+//    else {
+//      if ( !preg_match('/^[A-Za-z0-9]+$/', $_POST['input-password']) ) {
+//        $_SESSION['errors']['password-errors'][] = "Password incorrect.";
+//      }
+//      else {
+//        if (strtoupper($_POST['input-password']) !== MOVE_A_THON_PASSWORD) {
+//          $_SESSION['errors']['password-errors'][] = "Password incorrect.";
+//        }
+//      }
+//    }
 
     // Kid Step Validations
     if (empty($_POST['kid-steps']) && empty($_POST['adult-steps'])) {
@@ -135,7 +135,7 @@
       $_SESSION['kid-entry-date_entry'] = $_POST['kid-entry-date'];
       $_SESSION['adult-steps_entry'] = $_POST['adult-steps'];
       $_SESSION['adult-entry-date_entry'] = $_POST['adult-entry-date'];
-      $_SESSION['input-password_entry'] = $_POST['input-password'];
+//      $_SESSION['input-password_entry'] = $_POST['input-password'];
 
       header("Location: ../index.php");
       exit;
@@ -163,7 +163,7 @@
       unset($_SESSION['kid-entry-date_entry']);
       unset($_SESSION['adult-steps_entry']);
       unset($_SESSION['adult-entry-date_entry']);
-      unset($_SESSION['input-password_entry']);
+//      unset($_SESSION['input-password_entry']);
 
       header("Location: ./results.php");
       exit;

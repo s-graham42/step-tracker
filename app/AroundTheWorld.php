@@ -69,7 +69,10 @@ class AroundTheWorld {
       $message = "almost_to";
     }
 
-    if ($distanceToPrevious < 50 || $distanceToNext < 50) {
+    if ($closestCityIdx == 0 && $distanceToNext > 203) {
+      $message = $this->messages['have_departed'];
+    }
+    elseif ($distanceToPrevious < 50 || $distanceToNext < 50) {
       $message = $this->messages['have_reached'];
     }
     elseif ($distanceToPrevious < $distanceToNext) {
@@ -156,6 +159,7 @@ class AroundTheWorld {
 
   public function __construct() {
     $this->messages = [
+      'have_departed' => "have departed",
       'almost_to' => "are almost to",
       'have_reached' => "have reached",
       'just_passed' => "have just passed",

@@ -133,7 +133,7 @@
       $closestAdultCity = $aroundTheWorld->getClosestCity($adultStepsInMiles);
       $adultLapMessage = $aroundTheWorld->getLapMessage($adultLap, "adults");
 
-      $minimumDistance = 204;
+      $minimumDistance = 1;
       if ($kidStepsInMiles > $minimumDistance || $adultStepsInMiles > $minimumDistance) {
     ?>
 

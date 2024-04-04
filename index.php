@@ -27,7 +27,7 @@
   isset($_SESSION['kid-steps_entry']) ? "" : $_SESSION['kid-steps_entry'] = "";
   isset($_SESSION['adult-entry-date_entry']) ? "" : $_SESSION['adult-entry-date_entry'] = date("Y-m-d");
   isset($_SESSION['adult-steps_entry']) ? "" : $_SESSION['adult-steps_entry'] = "";
-  isset($_SESSION['input-password_entry']) ? "" : $_SESSION['input-password_entry'] = "";
+//  isset($_SESSION['input-password_entry']) ? "" : $_SESSION['input-password_entry'] = "";
 
 //    var_dump($_POST);
 //    var_dump($_SESSION);
@@ -107,11 +107,11 @@
             </div>
 
             <div class="submit-wrapper col-12 col-md-6 mx-auto mt-5">
-                <label for="input-password" class="form-label">Password</label>
-                <input type="password" id="input-password" name="input-password" class="form-control"
-                       value="<?= $_SESSION['input-password_entry']; ?>" aria-describedby="passwordHelpBlock">
-                <div id="passwordHelpBlock" class="form-text">Enter the Move-a-thon password.</div>
-                <?php showErrors('password-errors'); ?>
+<!--                <label for="input-password" class="form-label">Password</label>-->
+<!--                <input type="password" id="input-password" name="input-password" class="form-control"-->
+<!--                       value="--><?php //= $_SESSION['input-password_entry']; ?><!--" aria-describedby="passwordHelpBlock">-->
+<!--                <div id="passwordHelpBlock" class="form-text">Enter the Move-a-thon password.</div>-->
+<!--                --><?php //showErrors('password-errors'); ?>
 
                 <button type="submit" class="btn btn-lg btn-primary mt-4">Submit</button>
             </div>

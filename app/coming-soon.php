@@ -26,17 +26,17 @@
 <body>
 
 <main class="container-fluid mt-3">
-    <h2 class="text-center p-4 fw-bold rounded bg-sessfa-green">Get ready to move around the world with us!<br>Move-a-thon Step Tracker Coming Soon.</h2>
+    <h2 class="text-center text-white p-4 fw-bold rounded bg-sessfa-green">Get ready to move around the world with us!<br>Move-a-thon Step Tracker Coming Soon.</h2>
     <div class="col text-center text-nowrap">
         <img class="d-sm-none" src="../images/globe_north_america_800x800.png" width="252px" height="252px" alt="A true color image of the Earth" />
         <img class="d-none d-sm-inline-block" src="../images/globe_north_america_800x800.png" width="400px" height="400px" alt="A true color image of the Earth" />
     </div>
     <div class="col text-center px-2 px-md-3 px-lg-5 mt-3">
-        <p class="fs-4 fw-bold text-success">This year we are adding a new challenge to the Move-a-thon!</p>
-        <p class="fs-4 fw-bold text-success">We will be distributing pedometers so we can keep track of how far we have all traveled collectively.
+        <p class="fs-4 fw-bold text-sessfa-new-blue-dark">This year we are adding a new challenge to the Move-a-thon!</p>
+        <p class="fs-4 fw-bold text-sessfa-new-blue-dark">We will be distributing pedometers so we can keep track of how far we have all traveled collectively.
             Challenge your family and your teachers to input their movements too,
             and see if kids can beat the adults around the world.</p>
-        <p class="fs-4 fw-bold text-success">As we keep track of our total progress, the website will tell us where we are in the world.
+        <p class="fs-4 fw-bold text-sessfa-new-blue-dark">As we keep track of our total progress, the website will tell us where we are in the world.
             Check in to see where we have traveled, and take a moment to learn about a new place in the world.</p>
     </div>
 </main>

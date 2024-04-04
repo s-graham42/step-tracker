@@ -10,17 +10,19 @@
     --sessfa-sandy: #A2AF9F;
     --sessfa-bright-blue: #00B2FF;
     --sessfa-blue: #007CCA;
+    --sessfa-new-blue: #3371b2;
+    --sessfa-new-blue-dark: #28588a;
   }
 body {
  font-family: 'Montserrat';
  font-weight: 400;
 }
 .bg-sessfa-green {
-    background-color: var(--sessfa-green)!important;
+    background-color: var(--sessfa-new-blue)!important;
 }
 .btn-sessfa-primary {
     color: black;
-    background-color: var(--sessfa-green);
+    background-color: var(--sessfa-new-blue);
     border-color: black;
 }
 .bg-kid-form {
@@ -31,9 +33,11 @@ body {
     border-radius: 5px;
     background-color: #c5ffd1;
 }
-
+.text-sessfa-new-blue-dark {
+    color: #28588a;
+}
 .btn-sessfa-primary:hover {
-    background-color: var(--sessfa-dark-green);
+    background-color: var(--sessfa-new-blue-dark);
 }
 .text-sessfa-light {
     color: var(--sessfa-light-blue);
