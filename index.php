@@ -47,11 +47,8 @@
                 </a>
             </div>
             <div class="col-12 col-md-8 py-4 py-md-2 align-self-center text-center">
-                <h1><a href="https://www.sessfa.org/" class="text-dark text-decoration-none">Southeast Seattle Schools
+                <h1><a href="https://www.sessfa.org/" class="text-white text-decoration-none">Southeast Seattle Schools
                         Fundraising Alliance</a></h1>
-            </div>
-            <div class="col-12 col-lg-2 align-self-center text-center text-md-end">
-                <a class="btn btn-sessfa-primary" href="<?= DONATE_LINK ?>">Click to Donate!</a>
             </div>
         </div>
     </div>
@@ -106,7 +103,7 @@
                 </div>
             </div>
 
-            <div class="submit-wrapper col-12 col-md-6 mx-auto mt-5">
+            <div class="submit-wrapper col-12 col-md-6 mx-auto mt-5 text-center">
 <!--                <label for="input-password" class="form-label">Password</label>-->
 <!--                <input type="password" id="input-password" name="input-password" class="form-control"-->
 <!--                       value="--><?php //= $_SESSION['input-password_entry']; ?><!--" aria-describedby="passwordHelpBlock">-->

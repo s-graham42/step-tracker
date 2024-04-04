@@ -51,11 +51,7 @@
           </a>
         </div>
         <div class="col-12 col-md-8 py-4 py-md-2 align-self-center text-center">
-          <h1><a href="https://www.sessfa.org/" class="text-dark text-decoration-none">Southeast Seattle Schools Fundraising Alliance</a></h1>
-        </div>
-        <div class="col-12 col-lg-2 align-self-center text-center text-md-end">
-            <a class="btn btn-sessfa-primary" href="<?= DONATE_LINK ?>">Click to Donate!</a>
-
+          <h1><a href="https://www.sessfa.org/" class="text-white text-decoration-none">Southeast Seattle Schools Fundraising Alliance</a></h1>
         </div>
       </div>
     </div>
