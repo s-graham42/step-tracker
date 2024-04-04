@@ -17,6 +17,9 @@ body {
  font-family: 'Montserrat';
  font-weight: 400;
 }
+#headerwrapper {
+  border-radius: 1rem;
+}
 .bg-sessfa-green {
     background-color: var(--sessfa-new-blue)!important;
 }

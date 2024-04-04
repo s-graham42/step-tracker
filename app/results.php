@@ -42,7 +42,7 @@
 
   </style>
 
-  <header id="headerwrapper" class="bg-sessfa-green py-3">
+  <header id="headerwrapper" class="mt-3 mx-2 mx-md-4 mx-lg-5 bg-sessfa-green py-3">
     <div id="header" class="container w-100">
       <div class="row">
         <div class="col-12 col-md-3 col-lg-2 text-center text-md-start">
