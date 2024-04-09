@@ -38,11 +38,9 @@
 ?>
 
 <body>
-<?php
-  include_once('header.php');
-?>
+
   <main class="container">
-    <h3 class="fw-bold text-center my-3"><?= APPLICATION_TITLE; ?></h3>
+    <h3 class="fw-bold text-center mb-4"><?= APPLICATION_TITLE; ?></h3>
       <p class="h5 text-center my-1">Goal: All the way around the world!</p>
       <p class="h5 text-center my-1">Seattle to Seattle: <strong><?= number_format(intval($aroundTheWorld->circumnavigateMiles)) ?> miles (<?= number_format(intval($aroundTheWorld->circumnavigateSteps)) ?> steps).</strong></p>
     <div class="row mt-3">
