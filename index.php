@@ -33,26 +33,9 @@
 //    var_dump($_SESSION);
 ?>
 <body>
-<style>
-
-
-</style>
-
-<header id="headerwrapper" class="mt-3 mx-2 mx-md-4 mx-lg-5 bg-sessfa-green py-3">
-    <div id="header" class="container w-100">
-        <div class="row">
-            <div class="col-12 col-md-3 col-lg-2 text-center text-md-start">
-                <a href="https://www.sessfa.org/" class="text-dark text-decoration-none">
-                    <img src="images/SESSFA-move-a-thon-2023.png" style="width: 175px">
-                </a>
-            </div>
-            <div class="col-12 col-md-8 py-4 py-md-2 align-self-center text-center">
-                <h1><a href="https://www.sessfa.org/" class="text-white text-decoration-none">Southeast Seattle Schools
-                        Fundraising Alliance</a></h1>
-            </div>
-        </div>
-    </div>
-</header>
+<?php
+  include_once('app/header.php');
+?>
 <main class="container">
     <h1 class="text-center mt-5 mb-3"><?= APPLICATION_TITLE; ?></h1>
     <div class="row mb-5">

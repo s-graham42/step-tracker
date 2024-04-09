@@ -38,37 +38,22 @@
 ?>
 
 <body>
-  <style>
-
-  </style>
-
-  <header id="headerwrapper" class="mt-3 mx-2 mx-md-4 mx-lg-5 bg-sessfa-green py-3">
-    <div id="header" class="container w-100">
-      <div class="row">
-        <div class="col-12 col-md-3 col-lg-2 text-center text-md-start">
-          <a href="https://www.sessfa.org/" class="text-dark text-decoration-none">
-            <img src="../images/SESSFA-move-a-thon-2023.png" style="width: 175px">
-          </a>
-        </div>
-        <div class="col-12 col-md-8 py-4 py-md-2 align-self-center text-center">
-          <h1><a href="https://www.sessfa.org/" class="text-white text-decoration-none">Southeast Seattle Schools Fundraising Alliance</a></h1>
-        </div>
-      </div>
-    </div>
-  </header>
+<?php
+  include_once('header.php');
+?>
   <main class="container">
-    <h1 class="text-center my-5"><?= APPLICATION_TITLE; ?></h1>
-      <h2 class="text-center my-2">Goal: All the way around the world!</h2>
-      <h3 class="text-center my-2">Seattle to Seattle: <?= number_format(intval($aroundTheWorld->circumnavigateMiles)) ?> miles (<?= number_format(intval($aroundTheWorld->circumnavigateSteps)) ?> steps).</h3>
-    <div class="row mt-5">
+    <h3 class="fw-bold text-center my-3"><?= APPLICATION_TITLE; ?></h3>
+      <p class="h5 text-center my-1">Goal: All the way around the world!</p>
+      <p class="h5 text-center my-1">Seattle to Seattle: <strong><?= number_format(intval($aroundTheWorld->circumnavigateMiles)) ?> miles (<?= number_format(intval($aroundTheWorld->circumnavigateSteps)) ?> steps).</strong></p>
+    <div class="row mt-3">
       <div id="kid-globe-wrapper" class="col-12 col-md-6">
         <div class="text-center">
-          <h2 class="fw-bolder">Kid Steps</h2>
+          <h3 class="fw-bolder">Kid Steps</h3>
           <div>
-            <h3 id="kid-steps-total">Total:  <strong><?= number_format(intval($kidSteps)); ?></strong> steps</h3>
+            <h4 id="kid-steps-total">Total:  <strong><?= number_format(intval($kidSteps)); ?></strong> steps</h4>
           </div>
           <div>
-            <h3><strong><?= number_format($kidGoalPercent); ?>%</strong> of the Goal!</h3>
+            <h4><strong><?= number_format($kidGoalPercent); ?>%</strong> of the Goal!</h4>
           </div>
           <div id="tracker">
             <img class="globe" src="../images/globe_north_america_800x800.png">
@@ -81,13 +66,13 @@
         </div>
       </div>
       <div id="adult-globe-wrapper"  class="col-12 col-md-6 mt-5 mt-md-0">
-        <div class="text-center mt-5 mt-md-0">
-          <h2 class="fw-bolder">Adult Steps</h2>
+        <div class="text-center mt-3 mt-md-0">
+          <h3 class="fw-bolder">Adult Steps</h3>
             <div>
-                <h3>Total:  <span class="fw-bolder"><?= number_format(intval($adultSteps)); ?></span> steps</h3>
+                <h4>Total:  <span class="fw-bolder"><?= number_format(intval($adultSteps)); ?></span> steps</h4>
             </div>
             <div>
-                <h3><span class="fw-bolder"><?= number_format($adultGoalPercent); ?>%</span> of the Goal!</h3>
+                <h4><span class="fw-bolder"><?= number_format($adultGoalPercent); ?>%</span> of the Goal!</h4>
             </div>
           <div id="tracker">
             <img class="globe" src="../images/globe_north_america_800x800.png">
@@ -100,7 +85,7 @@
         </div>
       </div>
     </div>
-    <div class="row flex-wrap mt-5">
+    <div class="row flex-wrap mt-3">
       <div class="col text-center text-nowrap">
         <a href="../index.php" class="col btn btn-primary btn-lg">Enter More Steps</a>
       </div>
@@ -133,39 +118,39 @@
       if ($kidStepsInMiles > $minimumDistance || $adultStepsInMiles > $minimumDistance) {
     ?>
 
-    <div id="around-the-world-wrapper" class="row mt-5">
+    <div id="around-the-world-wrapper" class="row mt-4">
         <div class="col-12 col-md-6">
             <?php if ($kidStepsInMiles > $minimumDistance) { ?>
-                <h3 class="text-center">
+                <h4 class="h5 text-center">
                     Together, the <span class="fw-bolder">kids</span> have traveled<br>
                     <?= $kidLapMessage ?>
                     <?= $kidStepsInMiles ?> miles<br>
                     and <?= $closestKidCity['message'] ?>:
                     <a class="fw-bolder" href="<?= $closestKidCity['closest_city']['maps_link'] ?>"><?= $closestKidCity['closest_city']['name'] ?>!</a>
-                </h3>
+                </h4>
             <?php } ?>
         </div>
         <div class="col-12 col-md-6 order-4 order-md-2">
             <?php if ($adultStepsInMiles > $minimumDistance) { ?>
-                <h3 class="text-center">
+                <h4 class="h5 text-center">
                     Together, the <span class="fw-bolder">adults</span> have traveled<br>
                     <?= $adultLapMessage ?>
                     <?= $adultStepsInMiles ?> miles<br>
                     and <?= $closestAdultCity['message'] ?>:
                     <a class="fw-bolder" href="<?= $closestAdultCity['closest_city']['maps_link'] ?>"><?= $closestAdultCity['closest_city']['name'] ?>!</a>
-                </h3>
+                </h4>
             <?php } ?>
         </div>
         <div class="col-12 col-md-6 order-3">
           <?php if ($kidStepsInMiles > $minimumDistance) { ?>
-              <div class="mt-4 px-0 py-3 px-lg-5">
+              <div class="px-0 py-3 px-lg-5">
                   <iframe src="<?= $closestKidCity['closest_city']['embed_link'] ?>" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
               </div>
           <?php } ?>
         </div>
         <div class="col-12 col-md-6 order-5">
           <?php if ($adultStepsInMiles > $minimumDistance) { ?>
-              <div class="mt-4 px-0 py-3 px-lg-5">
+              <div class="px-0 py-3 px-lg-5">
                   <iframe src="<?= $closestAdultCity['closest_city']['embed_link'] ?>" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
               </div>
           <?php } ?>
@@ -183,12 +168,6 @@
   </main>
   <footer style="width:100%; height:100px;"></footer>
   <aside class="container mt-5 d-none">
-      <p>Todo:</p>
-      <ul>
-          <li>Bigger Globe images (and circles) at Desktop.</li>
-          <li>Continue working on responsiveness from 320px</li>
-          <li>Confetti</li>
-      </ul>
   </aside>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
