@@ -20,6 +20,15 @@ body {
 #headerwrapper {
   border-radius: 1rem;
 }
+.click-to-donate {
+    border-top: 5px solid #f0f0f0;
+    border-bottom: 5px solid #f0f0f0;
+    color: #3371b2;
+}
+.click-to-donate a {
+    color: #3371b2;
+}
+
 .bg-sessfa-green {
     background-color: var(--sessfa-new-blue)!important;
 }
