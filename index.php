@@ -41,7 +41,7 @@
     <h3 class="fw-bold text-center mb-2"><?= APPLICATION_TITLE; ?></h3>
     <h4 class="fw-bold text-center mb-4"><em>April 22nd-May 3rd</em></h4>
     <div class="row mb-5">
-        <a class="goto-results btn btn-success mb-3 mx-auto" href="app/results.php">Go to Results</a>
+        <a class="goto-results btn btn-success fs-5 mb-3 mx-auto" href="app/results.php">Move Around the World!<br>-- go right to results --</a>
     </div>
 
     <form action="app/process_steps.php" method="post">
