@@ -72,7 +72,29 @@
             <div id="kid-circle3" class="circles circle3"></div>
             <div id="kid-circle4" class="circles circle4"></div>
             <div id="kid-circle5" class="circles circle5"></div>
+            <div id="kid-circle6" class="circles circle6"></div>
+            <div id="kid-circle7" class="circles circle7"></div>
+            <div id="kid-circle8" class="circles circle8"></div>
           </div>
+
+          <?php
+            if ($kidGoalPercent > 500) {
+          ?>
+            <div class="over-5-times p-3 border border-1 bg-kid-form">
+                <h5 class="fw-semibold">The kids have gone so far!!</h5>
+                <p class="fw-semibold red-ring-text text-start mb-2"><span class="align-text-bottom red-rect"></span>Each red ring above represents <strong>5</strong> trips around the world!</p>
+              <?php
+                if ($kidGoalPercent > 1000) {
+              ?>
+                <p class="fw-semibold orange-ring-text text-start mb-2"><span class="align-text-bottom orange-rect"></span>Each orange ring above represents <strong>10</strong> trips around the world!</p>
+              <?php
+                }
+              ?>
+            </div>
+          <?php
+            }
+          ?>
+
         </div>
       </div>
       <div id="adult-globe-wrapper"  class="col-12 col-md-6 mt-5 mt-md-0">
@@ -91,11 +113,33 @@
             <div id="adult-circle3" class="circles circle3"></div>
             <div id="adult-circle4" class="circles circle4"></div>
             <div id="adult-circle5" class="circles circle5"></div>
+            <div id="adult-circle6" class="circles circle6"></div>
+            <div id="adult-circle7" class="circles circle7"></div>
+            <div id="adult-circle8" class="circles circle8"></div>
           </div>
+
+          <?php
+            if ($adultGoalPercent > 500) {
+          ?>
+            <div class="over-5-times p-3 border border-1 bg-kid-form">
+              <h5 class="fw-semibold">The adults have gone so far!!</h5>
+              <p class="fw-semibold red-ring-text text-start mb-2"><span class="align-text-bottom red-rect"></span>Each red ring above represents <strong>5</strong> trips around the world!</p>
+              <?php
+                if ($adultGoalPercent > 1000) {
+              ?>
+                <p class="fw-semibold orange-ring-text text-start mb-2"><span class="align-text-bottom orange-rect"></span>Each orange ring above represents <strong>10</strong> trips around the world!</p>
+              <?php
+                }
+              ?>
+            </div>
+          <?php
+            }
+          ?>
+
         </div>
       </div>
     </div>
-    <div class="row flex-wrap mt-3">
+    <div class="row flex-wrap mt-5">
       <div class="col text-center text-nowrap">
         <a href="../index.php" class="col btn btn-primary btn-lg">Enter More Steps</a>
       </div>
@@ -191,39 +235,88 @@
         const kidGoalPercent = <?= ($kidGoalPercent / 100) ?>;
         const adultGoalPercent = <?= ($adultGoalPercent / 100) ?>;
 
-        // let ringColors = ["#005E73", "#007480", "#008A79", "#009D5E", "#10AE2F", "#10AE2F"];
-        let ringColors = ["#10AE2F", "#009D5E", "#008A79", "#007480", "#005E73", "#005E73", "#10AE2F", "#009D5E", "#008A79", "#007480", "#005E73", "#005E73"];
+        let maxKidRings = Math.ceil(kidGoalPercent);
+        let maxAdultRings = Math.ceil(adultGoalPercent);
+        let maxRings = Math.max(maxKidRings, maxAdultRings);
 
-        let maxRings = Math.max(Math.ceil(kidGoalPercent), Math.ceil(adultGoalPercent));
+        function getRingColors(maxRings) {
+            let ringColors = ["#10AE2F", "#009D5E", "#008A79", "#007480", "#005E73"];
+
+            if (maxRings > 30) {
+                ringColors.unshift('#ffaf00', '#ffaf00', '#ffaf00');
+                maxRings = 3 + (maxRings % 5);
+                console.log(maxRings);
+            }
+            if (maxRings > 25) {
+                ringColors.unshift('#ffaf00', '#ffaf00', '#d13342');
+                maxRings = 3 + (maxRings % 5);
+                console.log(maxRings);
+            }
+            else if (maxRings > 20) {
+                ringColors.unshift('#ffaf00', '#ffaf00');
+                maxRings = 2 + (maxRings % 5);
+                console.log(maxRings);
+            }
+            else if (maxRings > 15) {
+                ringColors.unshift('#ffaf00', '#d13342');
+                maxRings = 2 + (maxRings % 5);
+                console.log(maxRings);
+            }
+            else if (maxRings > 10) {
+                ringColors.unshift('#ffaf00');
+                maxRings = 1 + (maxRings % 5);
+                console.log(maxRings);
+            }
+            else if (maxRings > 5) {
+                ringColors.unshift('#d13342');
+                maxRings = 1 + (maxRings % 5);
+                console.log(maxRings);
+            }
+
+            return ringColors;
+        }
+
+        function getRingPercent(actual) {
+            let tens = Math.floor(actual / 10);
+            let fives = Math.floor((actual - (tens * 10)) / 5);
+            let remainder = actual % 5;
+
+            return tens + fives + remainder;
+        }
+
+        let kidRingColors = getRingColors(maxKidRings);
+        let adultRingColors = getRingColors(maxAdultRings);
 
         function runCircles(idx) {
             let timeoutTime = (2000 * idx);
             let kidElementName = "#kid-circle" + (idx + 1);
             let adultElementName = "#adult-circle" + (idx + 1);
+            let kidRingPercent = getRingPercent(kidGoalPercent);
+            let adultRingPercent = getRingPercent(adultGoalPercent);
 
             setTimeout( function() {
-                if (kidGoalPercent > idx) {
+                if (kidRingPercent > idx) {
                     $(kidElementName).circleProgress({
-                        value: (kidGoalPercent > (idx + 1)) ? 1 : kidGoalPercent - idx,
+                        value: (kidRingPercent > (idx + 1)) ? 1 : kidRingPercent - idx,
                         size: 240 + (idx * 20),
                         thickness: 10,
                         startAngle: -Math.PI / 2,
                         lineCap: 'round',
-                        fill: ringColors[idx],
+                        fill: kidRingColors[idx],
                         emptyFill: '#ffffff',
                         animation: {
                             duration: 2000,
                         },
                     });
                 }
-                if (adultGoalPercent > idx) {
+                if (adultRingPercent > idx) {
                     $(adultElementName).circleProgress({
-                        value: (adultGoalPercent > (idx + 1) ? 1 : adultGoalPercent - idx),
+                        value: (adultRingPercent > (idx + 1) ? 1 : adultRingPercent - idx),
                         size: 240 + (idx * 20),
                         thickness: 10,
                         startAngle: -Math.PI / 2,
                         lineCap: 'round',
-                        fill: ringColors[idx],
+                        fill: adultRingColors[idx],
                         emptyFill: '#ffffff',
                         animation: {
                             duration: 2000,

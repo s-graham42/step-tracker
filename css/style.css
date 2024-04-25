@@ -64,13 +64,13 @@ img.globe {
     width: 252px;
     display: inline-block;
     position: relative;
-    margin-top: 50px;
+    margin-top: 60px;
 }
 .circles {
     height: 0;
-    width: 320px;
+    width: 380px;
     position: relative;
-    left: calc(50% - 160px);
+    left: calc(50% - 190px);
 }
 .circle1 {
     top: -246px;
@@ -86,4 +86,33 @@ img.globe {
 }
 .circle5 {
     top: -286px;
+}
+.circle6 {
+    top: -296px;
+}
+.circle7 {
+    top: -306px;
+}
+.circle8 {
+    top: -316px;
+}
+
+.red-rect {
+    display: inline-block;
+    background-color: #d13342;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    margin-right: 1rem;
+}
+.orange-rect {
+    display: inline-block;
+    background-color: #ffaf00;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    margin-right: 1rem;
+}
+.over-5-times {
+    margin-top: 68px;
 }
