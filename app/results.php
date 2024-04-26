@@ -121,7 +121,7 @@
           <?php
             if ($adultGoalPercent > 500) {
           ?>
-            <div class="over-5-times p-3 border border-1 bg-kid-form">
+            <div class="over-5-times p-3 border border-1 bg-adult-form">
               <h5 class="fw-semibold">The adults have gone so far!!</h5>
               <p class="fw-semibold red-ring-text text-start mb-2"><span class="align-text-bottom red-rect"></span>Each red ring above represents <strong>5</strong> trips around the world!</p>
               <?php
